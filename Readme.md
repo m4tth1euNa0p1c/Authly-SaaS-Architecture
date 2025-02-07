@@ -1,65 +1,64 @@
 ```markdown
 # Authly SaaS Architecture
 
-A robust authentication and authorization solution with a FastAPI back-end integrated with Firebase and a modern React (Vite + TypeScript) front-end.
+Une plateforme d’authentification et d’autorisation complète, basée sur FastAPI et Firebase côté back-end, et sur React (Vite + TypeScript) côté front-end.
 
 ---
 
-## Overview
+## Aperçu
 
-**Authly SaaS Architecture** provides:
-- JWT-based authentication with token expiration
-- Secure password hashing using bcrypt
-- Email verification via Firebase
-- Protected routes ensuring only authenticated users can access sensitive parts of the application
+Cette architecture propose :
+- Authentification JWT avec expiration
+- Hash sécurisée des mots de passe via bcrypt
+- Vérification d’adresse email via Firebase
+- Protection de routes pour contrôler l’accès aux sections sensibles
 
-The system is designed with layered security and following best practices for scalability and maintenance.
+Le tout suit les meilleures pratiques de sécurité et vise évolutivité et maintenance.
 
 ---
 
-## Project Structure
+## Structure du Projet
 
 ```
 Authly-SaaS-Architecture/
-├── api/                         
+├── api/
 │   ├── app/
-│   │   ├── config/              # Application configuration files
-│   │   ├── core/                # Database, Firebase, security, and utilities
-│   │   ├── middleware/          # Middleware (e.g., CORS, Rate Limiting)
-│   │   ├── models/              # Data models (User, RefreshToken, etc.)
-│   │   ├── repositories/        # Database CRUD operations
-│   │   ├── routes/              # API endpoints (authentication, etc.)
-│   │   ├── schemas/             # Pydantic schemas for validation
-│   │   └── services/            # Business logic for authentication and user management
-│   ├── credentials/             # Firebase credentials files
-│   ├── migrations/              # Alembic migration files
-│   ├── requirements.txt         # Python dependencies
-│   └── tests/                   # API test suite
-├── db/                          # Database configurations and Docker files
-└── frontend/                    
-   ├── public/                  # Public assets (HTML, images)
+│   │   ├── config/          # Fichiers de configuration
+│   │   ├── core/            # Base de données, Firebase, sécurité, utilitaires
+│   │   ├── middleware/      # Middlewares (CORS, limitation de débit, etc.)
+│   │   ├── models/          # Modèles (User, RefreshToken, etc.)
+│   │   ├── repositories/    # Opérations CRUD
+│   │   ├── routes/          # Endpoints API
+│   │   ├── schemas/         # Schémas Pydantic
+│   │   └── services/        # Logique de gestion (authentification, utilisateurs)
+│   ├── credentials/         # Fichiers d’identifiants Firebase
+│   ├── migrations/          # Fichiers de migration Alembic
+│   ├── requirements.txt     # Dépendances Python
+│   └── tests/               # Tests API
+├── db/                      # Configuration base de données et fichiers Docker
+└── frontend/
+   ├── public/               # Ressources publiques (HTML, images)
    ├── src/
-   │   ├── assets/              # Static assets (images, icons)
-   │   ├── components/          # React components (auth forms, header, etc.)
-   │   ├── contexts/            # Global context (e.g., AuthContext)
-   │   ├── hooks/               # Custom hooks (e.g., useAuth)
-   │   ├── layouts/             # Layout components for the app
-   │   ├── pages/               # Individual page components (Login, Register, Dashboard, VerifyEmail)
-   │   ├── services/            # API and Firebase service configurations
-   │   ├── store/               # Global state management (Redux/Context)
-   │   └── utils/               # Utility functions and validators
-   ├── package.json             # Node.js dependencies
-   └── vite.config.ts           # Vite configuration for React
+   │   ├── assets/
+   │   ├── components/
+   │   ├── contexts/
+   │   ├── hooks/
+   │   ├── layouts/
+   │   ├── pages/
+   │   ├── services/
+   │   ├── store/
+   │   └── utils/
+   ├── package.json
+   └── vite.config.ts
 ```
 
 ---
 
-## How to Run the Project
+## Comment Exécuter le Projet
 
 ### Back-End (API)
 
-1. **Setup Environment Variables**  
-   Create an `.env` file in the `api` folder:
+1. Créer un fichier `.env` dans `api` :
    ```env
    HOST=0.0.0.0
    PORT=8000
@@ -74,21 +73,20 @@ Authly-SaaS-Architecture/
    API_BASE_URL=http://127.0.0.1:8000
    ```
 
-2. **Install Dependencies**
+2. Installer les dépendances :
    ```bash
    cd api
    pip install -r requirements.txt
    ```
 
-3. **Run the API**
+3. Lancer l’API :
    ```bash
    uvicorn app.main:app --reload
    ```
 
 ### Front-End (React)
 
-1. **Setup Environment Variables**  
-   Create an `.env` file in the `frontend` folder:
+1. Créer le fichier `.env` dans `frontend` :
    ```env
    VITE_API_BASE_URL=http://127.0.0.1:8000
    VITE_FIREBASE_API_KEY=your_firebase_api_key
@@ -100,63 +98,26 @@ Authly-SaaS-Architecture/
    VITE_FIREBASE_MEASUREMENT_ID=your_firebase_measurement_id
    ```
 
-2. **Install Dependencies**
+2. Installer les dépendances :
    ```bash
    cd frontend
    npm install
    ```
 
-3. **Run the Front-End**
+3. Lancer le front-end :
    ```bash
    npm run dev
    ```
 
 ---
 
-## Roadmap & Improvements
+## Améliorations Futures
 
-### Back-End Enhancements
-
-- **Token Management:**  
-  - Implement refresh token storage in a database or cache (e.g., Redis)
-  - Add token blacklisting and JWT key rotation mechanisms
-
-- **Input Validation:**  
-  - Normalize user inputs (e.g., emails in lowercase, trimmed whitespace)
-  - Enforce strong password policies (minimum length, complexity)
-
-- **Logging and Error Handling:**  
-  - Replace print statements with a structured logging framework (e.g., Python’s logging module)
-  - Integrate a monitoring tool such as Sentry or Prometheus
-  - Standardize error handling via global exception handlers
-
-- **Rate Limiting:**  
-  - Implement middleware to control request rates per IP, using tools like SlowAPI or Redis-based solutions
-
-### Front-End Enhancements
-
-- **Security:**  
-  - Use HTTP-only cookies or other secure storage for tokens
-
-- **State Management and Routing:**  
-  - Implement global state management (e.g., Redux or React Context)
-  - Add route guards (e.g., ProtectedRoute) to restrict access based on authentication status
-
-- **User Experience:**  
-  - Improve error messages and include loading indicators
-  - Enable smooth navigation without full page reloads
-
-- **Firebase Integration:**  
-  - Utilize Firebase’s onAuthStateChanged for real-time authentication status updates
-
-### Testing & CI/CD
-
-- **Testing:**  
-  - Increase test coverage with unit and integration tests (pytest for back-end, Jest for front-end)
-
-- **CI/CD Pipelines:**  
-  - Automate testing and deployments with tools like GitHub Actions, GitLab CI, or Jenkins
-
-- **Security Audits:**  
-  - Regularly perform security audits and code reviews to adhere to best practices
+- Gestion avancée des tokens (refresh token, liste noire, rotation de clés)
+- Validation d’entrée approfondie (normaliser emails, mots de passe robustes)
+- Journalisation et gestion d’erreurs structurées (framework de logging, intégration Sentry)
+- Limitation de débit (IP-based rate limiting)
+- Stockage de tokens plus sécurisé (cookies HTTP-only)
+- Couverture de tests améliorée (pytest, Jest) et pipelines CI/CD
+- Audits de sécurité réguliers pour respecter les bonnes pratiques
 ```

@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  db:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+      args:
+        POSTGRES_USER: "authly_user"
+        POSTGRES_PASSWORD: "booga"
+        POSTGRES_DB: "authly_db"
+    environment:
+      - POSTGRES_USER=authly_user
+      - POSTGRES_PASSWORD=booga
+      - POSTGRES_DB=authly_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:

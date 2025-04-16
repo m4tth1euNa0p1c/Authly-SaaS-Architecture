@@ -1,50 +1,29 @@
-# Authly SaaS Architecture
-
-**Authly SaaS Architecture** est une solution complète d'authentification et d'autorisation.
-
-## Structure du Projet
-
-- **api/** : Back-end (FastAPI)
-- **db/** : Configuration de la base de données et fichiers Docker
-- **frontend/** : Front-end (React avec Vite & TypeScript)
-
-## Installation
-
-### Back-End (API)
-
-1. **Configurer l'environnement :**  
-   Créez un fichier `.env` dans le dossier `api` et définissez les variables nécessaires (ex. `HOST`, `PORT`, `DATABASE_URL`, etc.).
-
-2. **Installer les dépendances :**
-   ```bash
+solution dédiée à l'authentification et à l'autorisation.
+Structure du Projet
+ * api/ : Composant serveur (Back-end) développé avec FastAPI.
+ * db/ : Configuration de la base de données et fichiers de configuration Docker.
+ * frontend/ : Interface utilisateur (Front-end) développée avec React, utilisant Vite et TypeScript.
+Installation
+Composant Serveur (API)
+ * Configuration de l'environnement : Dans le répertoire api, créez un fichier .env et définissez les variables d'environnement requises (par exemple : HOST, PORT, DATABASE_URL).
+ * Installation des dépendances :
    cd api
-   pip install -r requirements.txt
-   ```
+pip install -r requirements.txt
 
-3. **Lancer l'API :**
-   ```bash
+ * Démarrage du serveur API :
    uvicorn app.main:app --reload
-   ```
 
-### Front-End (React)
-
-1. **Configurer l'environnement :**  
-   Créez un fichier `.env` dans le dossier `frontend` avec les variables nécessaires.
-
-2. **Installer les dépendances :**
-   ```bash
+Interface Utilisateur (Front-End)
+ * Configuration de l'environnement : Dans le répertoire frontend, créez un fichier .env et renseignez les variables d'environnement nécessaires.
+ * Installation des dépendances :
    cd frontend
-   npm install
-   ```
+npm install
 
-3. **Lancer le front-end :**
-   ```bash
+ * Lancement de l'application front-end :
    npm run dev
-   ```
 
-## Roadmap
-
-- Améliorer la gestion des tokens de rafraîchissement.
-- Renforcer la validation et la sécurité des entrées.
-- Implémenter la journalisation, le rate limiting et la gestion avancée des erreurs.
-- Optimiser le stockage sécurisé des tokens.
+Feuille de Route
+ * Amélioration de la gestion des jetons de rafraîchissement.
+ * Renforcement de la validation et de la sécurité des données entrantes.
+ * Implémentation de la journalisation, de la limitation de débit et d'une gestion avancée des erreurs.
+ * Optimisation du stockage sécurisé des jetons d'authentification.
